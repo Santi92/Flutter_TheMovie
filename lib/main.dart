@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_themoviedb/features/trending/page/trending_page.dart';
+import 'package:test_themoviedb/features/trending/presentation/page/trending_page.dart';
 
 void main() {
   runApp(MyApp());

@@ -50,8 +50,8 @@ class _MovieItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text("cUALQUIERA"),
-                      Text("cUALQUIERA"),
+                      Text("Example"),
+                      Text("Example"),
                     ],
                   ),
                 ),
