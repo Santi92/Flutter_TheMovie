@@ -10,7 +10,7 @@ class RemoteTrendingImpl extends RemoteTrending {
   RemoteTrendingImpl(this.client);
 
   @override
-  Future<TrendingResponse?> response() async {
+  Future<TrendingResponse?> getTrendingMovies() async {
     final Response<Map<String, dynamic>> json = await client.getTrending('1');
 
     final TrendingResponse? responseObject =
