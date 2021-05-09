@@ -7,7 +7,7 @@ import 'package:test_themoviedb/features/trending/datasource/remote/remote_trend
 class RemoteTrendingImpl extends RemoteTrending {
   final Client client;
 
-  RemoteTrendingImpl(this.client);
+  RemoteTrendingImpl({required this.client});
 
   @override
   Future<TrendingResponse?> getTrendingMovies() async {

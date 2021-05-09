@@ -11,7 +11,8 @@ class TrendingRepositoryImpl extends TrendingRepository {
   final NetworkInfo networkInfo;
   final RemoteTrending remoteTrending;
 
-  TrendingRepositoryImpl(this.networkInfo, this.remoteTrending);
+  TrendingRepositoryImpl(
+      {required this.networkInfo, required this.remoteTrending});
 
   @override
   Future<Either<Failure, List<Result>>> getTradingMovies() async {
