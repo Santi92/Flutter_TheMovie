@@ -87,7 +87,7 @@ class _MovieItem extends StatelessWidget {
           Column(
             children: [
               Expanded(
-                  flex: 7,
+                  flex: 8,
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(8.0),
@@ -99,27 +99,19 @@ class _MovieItem extends StatelessWidget {
                 flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0)
-                      .copyWith(top: 16),
+                      .copyWith(top: 14),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(movie.title ?? ""),
+                      Text(movie.title ?? "",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                          maxLines: 2),
                       Text(movie.getDeteString()),
                     ],
                   ),
                 ),
               )
             ],
-          ),
-          Positioned(
-            bottom: 70,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: CircleAvatar(
-                radius: 15,
-                backgroundColor: Colors.red,
-              ),
-            ),
           ),
         ],
       ),
