@@ -7,16 +7,16 @@ abstract class TrendingState extends Equatable {
   List<Object> get props => [];
 }
 
-class TripsInitial extends TrendingState {}
+class TrendingInitial extends TrendingState {}
 
-class LoadingTripsState extends TrendingState {}
+class TrendingLoadingState extends TrendingState {}
 
 class FailureConectionState extends TrendingState {}
 
 class ConenctionErrorState extends TrendingState {}
 
-class SuccessFulLoading extends TrendingState {
-  const SuccessFulLoading({
+class TrendingLoadSuccess extends TrendingState {
+  const TrendingLoadSuccess({
     required this.movies,
   });
 

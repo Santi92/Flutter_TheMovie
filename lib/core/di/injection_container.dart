@@ -1,7 +1,9 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:test_themoviedb/core/connection/client.dart';
 import 'package:test_themoviedb/core/connection/networkInfo.dart';
+import 'package:test_themoviedb/features/trending/di/trending_module.dart';
 
 final sl = GetIt.instance;
 
@@ -18,18 +20,8 @@ Future<void> init() async {
   );
   final Dio dio = Dio(options);
 
-  dio.interceptors.add(PrettyDioLogger());
   sl.registerLazySingleton(() => Client(dio));
-  //sl.registerLazySingleton(
-  //    () => RestClient(dio, baseUrl: 'https://system.boomerangbike.com'));
 
   //! Features module
-  LoginModule(sl).init();
-  HomeModule(sl).init();
-  DeviceModule(sl).init();
-  BikeDetailModule(sl).init();
-  TripInfoModule(sl).init();
-  SettingsModule(sl).init();
-  TripsModule(sl).init();
-  TripsDeditailModule(sl).init();
+  TredingModule(sl).init();
 }

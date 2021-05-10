@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_themoviedb/core/widget/simple_bloc_observer.dart';
 import 'package:test_themoviedb/features/trending/presentation/page/trending_page.dart';
+import 'core/di/injection_container.dart' as di;
 
-void main() {
+void main() async {
+  await di.init();
+  Bloc.observer = SimpleBlocObserver();
+
   runApp(MyApp());
 }
 

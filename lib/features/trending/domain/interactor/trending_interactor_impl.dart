@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
+
 import 'package:test_themoviedb/core/error/failure.dart';
 import 'package:test_themoviedb/features/trending/domain/interactor/trending_interactor.dart';
 import 'package:test_themoviedb/features/trending/domain/interactor/trending_mapper.dart';

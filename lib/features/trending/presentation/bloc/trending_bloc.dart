@@ -7,15 +7,15 @@ import 'package:test_themoviedb/features/trending/domain/models/movie.dart';
 import 'package:test_themoviedb/features/trending/presentation/bloc/trending_event.dart';
 import 'package:test_themoviedb/features/trending/presentation/bloc/trending_state.dart';
 
-class TripsBloc extends Bloc<TrendingEvent, TrendingState> {
-  TripsBloc({required this.interactor}) : super(TrendingInitial());
+class TrendingBloc extends Bloc<TrendingEvent, TrendingState> {
+  TrendingBloc({required this.interactor}) : super(TrendingInitial());
   final TrendingInteractor interactor;
   @override
   Stream<TrendingState> mapEventToState(
     TrendingEvent event,
   ) async* {
     if (event is LoadMovies) {
-      yield LoadingTrendingState();
+      yield TrendingLoadingState();
       final _result = await interactor.getTrendingMovies();
       yield* _eitherLoadedOrErrorState(_result);
     }
@@ -26,7 +26,7 @@ class TripsBloc extends Bloc<TrendingEvent, TrendingState> {
   ) async* {
     yield failureOrData.fold(
       (failure) => _mapFailureToMessage(failure),
-      (list) => SuccessFulLoading(movies: list),
+      (list) => TrendingLoadSuccess(movies: list),
     );
   }
 
