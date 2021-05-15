@@ -5,17 +5,11 @@ class Client {
   final Dio _dio;
 
   Future<Response<Map<String, dynamic>>> getTrending(String page) async {
-    final path = '/trending/movie/week';
-    final queryParams = _buildParameters(page);
+    final path = 'trending/movie/week?page=$page&api_key=${_token()}';
 
-    final Response<Map<String, dynamic>> response =
-        await _dio.get(path, queryParameters: queryParams);
+    final Response<Map<String, dynamic>> response = await _dio.get(path);
 
     return response;
-  }
-
-  Map<String, dynamic> _buildParameters(String page) {
-    return {'page': page, 'api_key': _token()};
   }
 
   String _token() {
