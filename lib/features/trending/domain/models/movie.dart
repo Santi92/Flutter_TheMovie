@@ -22,4 +22,9 @@ class Movie {
 
     return df.format(datTime);
   }
+
+  @override
+  String toString() {
+    return title ?? "-";
+  }
 }
