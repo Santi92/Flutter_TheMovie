@@ -11,7 +11,7 @@
   This application shows a list of trendings movies.
 
 
-  ![screenshot1](https://github.com/Santi92/Flutter_TheMovie/blob/main/images/Sapp_movies.png)
+  ![screenshot1](https://github.com/Santi92/Flutter_TheMovie/blob/main/images/app_movies.png.png)
 
 
 
@@ -27,7 +27,12 @@
 
 
   ### Coverage
-    Currently the project has a coverage of 80%, to carry this out, abstractions and implementations were developed to be able to mock all the dependencies and to be able to simulate the different behaviors in the app.
+  ![Coverage](https://github.com/Santi92/Flutter_TheMovie/blob/main/images/coverage.png.png)
 
-    ![coverage](https://github.com/Santi92/Flutter_TheMovie/blob/main/images/coverage.png.png)
+Currently the project has a coverage of 80%, to carry this out, abstractions and implementations were developed to be able to mock all the dependencies and to be able to simulate the different behaviors in the app.
+
+
+
+
+    
 
