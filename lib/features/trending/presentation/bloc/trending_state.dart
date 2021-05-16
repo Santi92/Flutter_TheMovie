@@ -17,10 +17,22 @@ class ConenctionErrorState extends TrendingState {}
 
 class TrendingLoadSuccess extends TrendingState {
   const TrendingLoadSuccess({
+    required this.hasReachedMax,
     required this.movies,
   });
 
   final List<Movie> movies;
+  final bool hasReachedMax;
+
+  TrendingLoadSuccess copyWith({
+    List<Movie>? movies,
+    bool? hasReachedMax,
+  }) {
+    return TrendingLoadSuccess(
+      movies: movies ?? this.movies,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+    );
+  }
 
   @override
   List<Object> get props => [movies.toString()];

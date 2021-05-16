@@ -15,11 +15,12 @@ class TrendingRepositoryImpl extends TrendingRepository {
       {required this.networkInfo, required this.remoteTrending});
 
   @override
-  Future<Either<Failure, List<Result>>> getTradingMovies() async {
+  Future<Either<Failure, List<Result>>> getTradingMovies(
+      String numberPage) async {
     if (await networkInfo.isConnected) {
       try {
         final TrendingResponse? response =
-            await remoteTrending.getTrendingMovies();
+            await remoteTrending.getTrendingMovies(numberPage);
 
         if (response != null) {
           return Right(response.results);

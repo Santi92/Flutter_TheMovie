@@ -23,6 +23,16 @@ class TredingPageWidget extends StatefulWidget {
 }
 
 class _TredingPageState extends State<TredingPageWidget> {
+  final _scrollController = ScrollController();
+  late TrendingBloc _postBloc;
+
+  @override
+  void initState() {
+    _scrollController.addListener(_onScroll);
+    _postBloc = context.read<TrendingBloc>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,17 +49,25 @@ class _TredingPageState extends State<TredingPageWidget> {
         return Center(child: CircularProgressIndicator());
       }
       if (state is TrendingLoadSuccess) {
-        return GridView.count(
-          crossAxisCount: 2,
-          childAspectRatio: 0.6,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
+        return GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 0.6,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
           padding: const EdgeInsets.symmetric(
             horizontal: 10,
           ),
-          children: List.generate(state.movies.length, (index) {
-            return _MovieItem(movie: state.movies[index]);
-          }),
+          itemBuilder: (BuildContext context, int index) {
+            return index >= state.movies.length
+                ? BottomLoader()
+                : _MovieItem(movie: state.movies[index]);
+          },
+          itemCount: state.hasReachedMax
+              ? state.movies.length
+              : state.movies.length + 1,
+          controller: _scrollController,
         );
       }
 
@@ -61,6 +79,17 @@ class _TredingPageState extends State<TredingPageWidget> {
       }
       return _showGenericError();
     });
+  }
+
+  void _onScroll() {
+    if (_isBottom) _postBloc.add(PostFetched());
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
   }
 }
 
@@ -126,5 +155,18 @@ class _MovieItem extends StatelessWidget {
         fit: BoxFit.fill,
       ),
     ));
+  }
+}
+
+class BottomLoader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: SizedBox(
+        height: 24,
+        width: 24,
+        child: CircularProgressIndicator(strokeWidth: 1.5),
+      ),
+    );
   }
 }

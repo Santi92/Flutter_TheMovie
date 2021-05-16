@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_themoviedb/core/widget/simple_bloc_observer.dart';
@@ -6,6 +8,7 @@ import 'core/di/injection_container.dart' as di;
 
 void main() async {
   await di.init();
+  EquatableConfig.stringify = kDebugMode;
   Bloc.observer = SimpleBlocObserver();
 
   runApp(MyApp());

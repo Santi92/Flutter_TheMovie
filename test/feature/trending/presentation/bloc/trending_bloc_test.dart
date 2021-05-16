@@ -30,7 +30,7 @@ void main() {
     blocTest<TrendingBloc, TrendingState>(
       'should emit Success load moovied in to an LoadMovies event',
       build: () {
-        when(() => interactor.getTrendingMovies())
+        when(() => interactor.getTrendingMovies("1"))
             .thenAnswer((_) => Future.value(
                   Right<Failure, List<Movie>>([]),
                 ));
@@ -39,14 +39,14 @@ void main() {
       act: (bloc) async => bloc.add(LoadMovies()),
       expect: () => <TrendingState>[
         TrendingLoadingState(),
-        const TrendingLoadSuccess(movies: [])
+        const TrendingLoadSuccess(movies: [], hasReachedMax: false)
       ],
     );
 
     blocTest<TrendingBloc, TrendingState>(
       'should emit FailedConnection in to an LoadMovies is event',
       build: () {
-        when(() => interactor.getTrendingMovies())
+        when(() => interactor.getTrendingMovies("1"))
             .thenAnswer((_) async => Left(ConnectNetworkFailure()));
         return bloc;
       },
@@ -60,7 +60,7 @@ void main() {
     blocTest<TrendingBloc, TrendingState>(
       'should emit ServerFailure load devices in to an LoadDevices event',
       build: () {
-        when(() => interactor.getTrendingMovies())
+        when(() => interactor.getTrendingMovies("1"))
             .thenAnswer((_) async => Left(ServerFailure()));
         return bloc;
       },

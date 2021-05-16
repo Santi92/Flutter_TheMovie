@@ -7,3 +7,5 @@ abstract class TrendingEvent extends Equatable {
 }
 
 class LoadMovies extends TrendingEvent {}
+
+class PostFetched extends TrendingEvent {}

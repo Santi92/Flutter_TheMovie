@@ -35,10 +35,10 @@ void main() {
     () async {
       // arrange
       when(() => networkInfo.isConnected).thenAnswer((_) async => true);
-      when(() => remoteDate.getTrendingMovies())
+      when(() => remoteDate.getTrendingMovies("1"))
           .thenAnswer((_) async => Future.value(null));
       // act
-      await repository.getTradingMovies();
+      await repository.getTradingMovies("1");
       // assert
       verify(() => networkInfo.isConnected);
     },
@@ -49,14 +49,14 @@ void main() {
     () async {
       final response = trendingResponseFromJson(trendingJson());
       // arrange
-      when(() => remoteDate.getTrendingMovies())
+      when(() => remoteDate.getTrendingMovies("1"))
           .thenAnswer((_) async => Future.value(response));
       when(() => networkInfo.isConnected).thenAnswer((_) async => true);
 
       // act
-      final result = await repository.getTradingMovies();
+      final result = await repository.getTradingMovies("1");
       // assert
-      verify(() => remoteDate.getTrendingMovies());
+      verify(() => remoteDate.getTrendingMovies("1"));
       verify(() => networkInfo.isConnected);
       expect(result.getOrElse(() => []), response.results);
     },
@@ -69,9 +69,9 @@ void main() {
       when(() => networkInfo.isConnected).thenAnswer((_) async => false);
 
       // act
-      final result = await repository.getTradingMovies();
+      final result = await repository.getTradingMovies("1");
       // assert
-      verifyNever(() => remoteDate.getTrendingMovies());
+      verifyNever(() => remoteDate.getTrendingMovies("1"));
       verify(() => networkInfo.isConnected);
       expect(
         result,
@@ -84,14 +84,14 @@ void main() {
     'should receive an authorization when the app does not have a valid token',
     () async {
       // arrange
-      when(() => remoteDate.getTrendingMovies())
+      when(() => remoteDate.getTrendingMovies("1"))
           .thenThrow(ServerUnauthorizedException());
       when(() => networkInfo.isConnected).thenAnswer((_) async => true);
 
       // act
-      final result = await repository.getTradingMovies();
+      final result = await repository.getTradingMovies("1");
       // assert
-      verify(() => remoteDate.getTrendingMovies());
+      verify(() => remoteDate.getTrendingMovies("1"));
       verify(() => networkInfo.isConnected);
       expect(result, Left<Failure, List<Result>>(NotAuthorized()));
     },
@@ -101,13 +101,14 @@ void main() {
     'should receive a from server when the server fails like for example a 500',
     () async {
       // arrange
-      when(() => remoteDate.getTrendingMovies()).thenThrow(ServerException());
+      when(() => remoteDate.getTrendingMovies("1"))
+          .thenThrow(ServerException());
       when(() => networkInfo.isConnected).thenAnswer((_) async => true);
 
       // act
-      final result = await repository.getTradingMovies();
+      final result = await repository.getTradingMovies("1");
       // assert
-      verify(() => remoteDate.getTrendingMovies());
+      verify(() => remoteDate.getTrendingMovies("1"));
       verify(() => networkInfo.isConnected);
       expect(result, Left<Failure, List<Result>>(ServerFailure()));
     },
@@ -117,14 +118,14 @@ void main() {
     'should receive a from server when the resource is not found',
     () async {
       // arrange
-      when(() => remoteDate.getTrendingMovies())
+      when(() => remoteDate.getTrendingMovies("1"))
           .thenThrow(ServerUnauthorizedException());
       when(() => networkInfo.isConnected).thenAnswer((_) async => true);
 
       // act
-      final result = await repository.getTradingMovies();
+      final result = await repository.getTradingMovies("1");
       // assert
-      verify(() => remoteDate.getTrendingMovies());
+      verify(() => remoteDate.getTrendingMovies("1"));
       verify(() => networkInfo.isConnected);
       expect(result, Left<Failure, List<Result>>(NotAuthorized()));
     },

@@ -12,8 +12,9 @@ class TrendingInteractorImpl extends TrendingInteractor {
   TrendingInteractorImpl(this._respository);
 
   @override
-  Future<Either<Failure, List<Movie>>> getTrendingMovies() async {
-    final result = await _respository.getTradingMovies();
+  Future<Either<Failure, List<Movie>>> getTrendingMovies(
+      String numberPage) async {
+    final result = await _respository.getTradingMovies(numberPage);
 
     return result.fold((l) {
       return Left(l);

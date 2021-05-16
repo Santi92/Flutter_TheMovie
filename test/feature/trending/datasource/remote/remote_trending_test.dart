@@ -37,7 +37,7 @@ void main() {
           (request) => request.reply(200, expectTreding.toJson()));
 
       //act
-      final result = await remoteData.getTrendingMovies();
+      final result = await remoteData.getTrendingMovies("1");
       //assert
       expect(result.toString(), expectTreding.toString());
     },
@@ -57,7 +57,7 @@ void main() {
       );
       try {
         //act
-        await remoteData.getTrendingMovies();
+        await remoteData.getTrendingMovies("1");
       } catch (e) {
         expect(e, isInstanceOf<DioError>());
       }

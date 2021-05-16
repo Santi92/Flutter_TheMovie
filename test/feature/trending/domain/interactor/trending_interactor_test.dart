@@ -24,17 +24,18 @@ void main() {
     'should get successfully have the trending movies associated to week',
     () async {
       //arrange
-      when(() => repository.getTradingMovies()).thenAnswer((_) => Future.value(
-            Right<Failure, List<Result>>([]),
-          ));
+      when(() => repository.getTradingMovies("1"))
+          .thenAnswer((_) => Future.value(
+                Right<Failure, List<Result>>([]),
+              ));
 
       //act
-      final result = await interactor.getTrendingMovies();
+      final result = await interactor.getTrendingMovies("1");
 
       //assert
       expect(result.isRight(), true);
       expect(result.getOrElse(() => [Movie(title: "test"), Movie()]), []);
-      verify(() => repository.getTradingMovies());
+      verify(() => repository.getTradingMovies("1"));
     },
   );
 
@@ -42,19 +43,20 @@ void main() {
     'should get error Not Authorized have the trending movies associated to week',
     () async {
       //arrange
-      when(() => repository.getTradingMovies()).thenAnswer((_) => Future.value(
-            Left<Failure, List<Result>>(NotAuthorized()),
-          ));
+      when(() => repository.getTradingMovies("1"))
+          .thenAnswer((_) => Future.value(
+                Left<Failure, List<Result>>(NotAuthorized()),
+              ));
 
       //act
-      final result = await interactor.getTrendingMovies();
+      final result = await interactor.getTrendingMovies("1");
 
       //assert
       expect(
         result,
         Left<Failure, List<Movie>>(NotAuthorized()),
       );
-      verify(() => repository.getTradingMovies());
+      verify(() => repository.getTradingMovies("1"));
     },
   );
 }
