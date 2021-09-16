@@ -27,6 +27,11 @@ jobs:
       - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
         with:
           sdk: 2.13.3
+      - name: Setup Flutter 2.2.2
+        id: flutter
+        uses: DanTup/gh-actions/setup-flutter@master
+        with:
+          channel: 2.2.2    
       - name: Install dependencies
         run: dart pub get
 
