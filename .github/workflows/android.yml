@@ -10,11 +10,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Sail to the gradlew
-        run:  cd android/  
       - name: Checkout the code
         uses: actions/checkout@v2
       - name: Build the app
+        working-directory: ./android
         run:  ./gradlew build 
       - name: Test Android
+        working-directory: ./android
         run:  ./gradlew test 
