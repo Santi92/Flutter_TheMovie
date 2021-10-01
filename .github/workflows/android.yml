@@ -11,14 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/cache@v2
-      with:
-       path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-             |
-          ${{ runner.os }}-gradle-
     - name: Set Up JDK
       uses: actions/setup-java@v1
       with:
