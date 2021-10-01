@@ -1,18 +1,29 @@
-name: Android CI test
+name: Android CI
 
 on:
- push:
-   branches: [ master ]
- pull_request:
-   branches: [ master ]
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
-      - name: Build the app
-        run:  /android ./gradlew build 
-      - name: Test Android
-        run: /android ./gradlew test 
+    - uses: actions/checkout@v2
+    - name: set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: gradle
+    - name: gradlew
+      uses: gradle/gradle-build-action@v2
+      with:
+        gradle-version: 6.7
+    - name: Build with Gradle
+      working-directory: ./android
+      run: gradle build
+
