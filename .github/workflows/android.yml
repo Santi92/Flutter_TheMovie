@@ -23,8 +23,10 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         gradle-version: 6.5
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradle
+    - uses: gradle/gradle-build-action@v2
+      id: gradle
+      with:
+        arguments: build
     - name: Build with Gradle
       working-directory: ./android
       run: gradle build
